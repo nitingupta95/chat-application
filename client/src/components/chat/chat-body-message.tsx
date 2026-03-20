@@ -24,35 +24,37 @@ const ChatMessageBody = memo(({ message, onReply }: Props) => {
       : message.replyTo?.sender?.name;
 
   const containerClass = cn(
-    "group flex gap-2 py-3 px-4",
+    "group flex gap-2.5 py-2 px-4",
     isCurrentUser && "flex-row-reverse text-left"
   );
 
   const contentWrapperClass = cn(
-    "max-w-[70%]  flex flex-col relative",
+    "max-w-[70%] flex flex-col relative",
     isCurrentUser && "items-end"
   );
 
   const messageClass = cn(
-    "min-w-[200px] px-3 py-2 text-sm break-words shadow-sm",
+    "min-w-[180px] px-3.5 py-2.5 text-sm break-words transition-shadow duration-200",
     isCurrentUser
-      ? "bg-accent dark:bg-primary/40 rounded-tr-xl rounded-l-xl"
-      : "bg-[#F5F5F5] dark:bg-accent rounded-bl-xl rounded-r-xl"
+      ? "gradient-primary text-white rounded-2xl rounded-tr-md shadow-md shadow-primary/15"
+      : "bg-card dark:bg-accent/80 border border-border/50 rounded-2xl rounded-tl-md shadow-sm"
   );
 
   const replyBoxClass = cn(
-    `mb-2 p-2 text-xs rounded-md border-l-4 shadow-md !text-left`,
+    `mb-1.5 p-2.5 text-xs rounded-lg border-l-3 !text-left`,
     isCurrentUser
-      ? "bg-primary/20 border-l-primary"
-      : "bg-gray-200 dark:bg-secondary border-l-[#CC4A31]"
+      ? "bg-white/15 border-l-white/50 text-white/90"
+      : "bg-muted/80 dark:bg-secondary/80 border-l-primary"
   );
+
   return (
     <div className={containerClass}>
       {!isCurrentUser && (
-        <div className="flex-shrink-0 flex items-start">
+        <div className="flex-shrink-0 flex items-end mb-1">
           <AvatarWithBadge
             name={message.sender?.name || "No name"}
             src={message.sender?.avatar || ""}
+            size="w-7 h-7"
           />
         </div>
       )}
@@ -65,11 +67,24 @@ const ChatMessageBody = memo(({ message, onReply }: Props) => {
           )}
         >
           <div className={messageClass}>
-            {/* {Header} */}
-
-            <div className="flex items-center gap-2 mb-0.5 pb-1">
-              <span className="text-xs font-semibold">{senderName}</span>
-              <span className="text-[11px] text-gray-700 dark:text-gray-300">
+            {/* Header */}
+            <div className="flex items-center gap-2 mb-1">
+              <span
+                className={cn(
+                  "text-xs font-semibold",
+                  isCurrentUser ? "text-white/90" : "text-foreground"
+                )}
+              >
+                {senderName}
+              </span>
+              <span
+                className={cn(
+                  "text-[10px]",
+                  isCurrentUser
+                    ? "text-white/60"
+                    : "text-muted-foreground/60"
+                )}
+              >
                 {formatChatTime(message?.createdAt)}
               </span>
             </div>
@@ -77,11 +92,14 @@ const ChatMessageBody = memo(({ message, onReply }: Props) => {
             {/* ReplyToBox */}
             {message.replyTo && (
               <div className={replyBoxClass}>
-                <h5 className="font-medium">{replySendername}</h5>
+                <h5 className="font-medium text-[11px]">{replySendername}</h5>
                 <p
-                  className="font-normal text-muted-foreground
-                 max-w-[250px]  truncate
-                "
+                  className={cn(
+                    "font-normal max-w-[250px] truncate text-[11px] mt-0.5",
+                    isCurrentUser
+                      ? "text-white/70"
+                      : "text-muted-foreground"
+                  )}
                 >
                   {message?.replyTo?.content ||
                     (message?.replyTo?.image ? "📷 Photo" : "")}
@@ -93,26 +111,31 @@ const ChatMessageBody = memo(({ message, onReply }: Props) => {
               <img
                 src={message?.image || ""}
                 alt=""
-                className="rounded-lg max-w-xs"
+                className="rounded-xl max-w-xs my-1"
               />
             )}
 
-            {message.content && <p>{message.content}</p>}
+            {message.content && (
+              <p className={cn(isCurrentUser ? "text-white/95" : "")}>
+                {message.content}
+              </p>
+            )}
           </div>
 
-          {/* {Reply Icon Button} */}
+          {/* Reply Icon Button */}
           <Button
             variant="outline"
             size="icon"
             onClick={() => onReply(message)}
             className="flex opacity-0 group-hover:opacity-100
-            transition-opacity rounded-full !size-8
+            transition-all duration-200 rounded-full !size-7
+            border-border/50 hover:bg-accent/80 hover:scale-110
             "
           >
             <ReplyIcon
-              size={16}
+              size={14}
               className={cn(
-                "text-gray-500 dark:text-white !stroke-[1.9]",
+                "text-muted-foreground",
                 isCurrentUser && "scale-x-[-1]"
               )}
             />
@@ -122,7 +145,7 @@ const ChatMessageBody = memo(({ message, onReply }: Props) => {
         {message.status && (
           <span
             className="block
-           text-[10px] text-gray-400 mt-0.5"
+           text-[10px] text-muted-foreground/50 mt-0.5"
           >
             {message.status}
           </span>

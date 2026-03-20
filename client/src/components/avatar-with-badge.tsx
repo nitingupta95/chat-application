@@ -26,17 +26,17 @@ const AvatarWithBadge = ({
       className="relative
     shrink-0"
     >
-      <Avatar className={size}>
-        <AvatarImage src={avatar} />
+      <Avatar className={cn(size, "ring-2 ring-background transition-transform duration-200")}>
+        <AvatarImage src={avatar} className="object-cover" />
         <AvatarFallback
           className={cn(
-            `bg-primary/10
-         text-primary font-semibold
+            `bg-gradient-to-br from-primary/20 to-purple-500/20
+         text-primary font-semibold text-xs
         `,
             className && className
           )}
         >
-          {name?.charAt(0)}
+          {name?.charAt(0)?.toUpperCase()}
         </AvatarFallback>
       </Avatar>
 
@@ -46,8 +46,9 @@ const AvatarWithBadge = ({
           bottom-0
           right-0
           h-2.5 w-2.5 rounded-full
-          border-2
-          bg-green-500
+          border-2 border-background
+          bg-emerald-500
+          animate-online-pulse
           "
         />
       )}

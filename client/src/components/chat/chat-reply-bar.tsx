@@ -15,25 +15,25 @@ const ChatReplyBar = ({ replyTo, currentUserId, onCancel }: Props) => {
   return (
     <div
       className="absolute bottom-16 left-0 right-0
-    bg-card border-t animate-in slide-in-from-bottom
- pb-4 px-6
-
+    bg-card/95 backdrop-blur-xl border-t border-border/50
+    animate-in slide-in-from-bottom duration-200
+    pb-3 px-5
     "
     >
       <div
         className="flex flex-1 justify-between mt-2 p-3 text-sm
-        border-l-4 border-l-primary
-        bg-primary/10 rounded-md shadow-sm
+        border-l-3 border-l-primary
+        bg-primary/5 dark:bg-primary/10 rounded-lg
         "
       >
-        <div className="flex-1">
-          <h5 className="font-medium">{senderName}</h5>
+        <div className="flex-1 min-w-0">
+          <h5 className="font-semibold text-xs text-primary">{senderName}</h5>
           {replyTo?.image ? (
-            <p className="text-muted-foreground">📷 Photo</p>
+            <p className="text-muted-foreground text-xs mt-0.5">📷 Photo</p>
           ) : (
             <p
               className="max-w-4xl
-            truncate text-ellipsis"
+            truncate text-ellipsis text-xs text-muted-foreground/80 mt-0.5"
             >
               {replyTo.content}
             </p>
@@ -43,7 +43,7 @@ const ChatReplyBar = ({ replyTo, currentUserId, onCancel }: Props) => {
           variant="ghost"
           size="icon"
           onClick={onCancel}
-          className="shrink-0 siz-6"
+          className="shrink-0 !size-6 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors"
         >
           <X size={14} />
         </Button>

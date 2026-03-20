@@ -81,24 +81,25 @@ const ChatFooter = ({
       <div
         className="sticky bottom-0
        inset-x-0 z-[999]
-       bg-card border-t border-border py-4
+       bg-card/80 backdrop-blur-xl border-t border-border/50 py-3
       "
       >
         {image && !isSendingMsg && (
-          <div className="max-w-6xl mx-auto px-8.5">
-            <div className="relative w-fit">
+          <div className="max-w-6xl mx-auto px-5 mb-2">
+            <div className="relative w-fit group">
               <img
                 src={image}
-                className="object-contain h-16 bg-muted min-w-16"
+                className="object-contain h-16 bg-muted rounded-xl min-w-16"
               />
 
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute top-px right-1
-                 bg-black/50 text-white rounded-full
-                 cursor-pointer
+                className="absolute -top-1.5 -right-1.5
+                 bg-destructive text-white rounded-full
+                 cursor-pointer !size-5 opacity-0 group-hover:opacity-100
+                 transition-opacity shadow-md
                 "
                 onClick={handleRemoveImage}
               >
@@ -110,7 +111,7 @@ const ChatFooter = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="max-w-6xl px-8.5 mx-auto
+            className="max-w-6xl px-4 mx-auto
             flex items-end gap-2
             "
           >
@@ -120,10 +121,10 @@ const ChatFooter = ({
                 variant="outline"
                 size="icon"
                 disabled={isSendingMsg}
-                className="rounded-full"
+                className="rounded-full border-border/50 hover:bg-accent/80 hover:scale-105 transition-all duration-200"
                 onClick={() => imageInputRef.current?.click()}
               >
-                <Paperclip className="h-4 w-4" />
+                <Paperclip className="h-4 w-4 text-muted-foreground" />
               </Button>
               <input
                 type="file"
@@ -143,8 +144,10 @@ const ChatFooter = ({
                   <Input
                     {...field}
                     autoComplete="off"
-                    placeholder="Type new message"
-                    className="min-h-[40px] bg-background"
+                    placeholder="Type a message..."
+                    className="min-h-[42px] bg-muted/50 border-border/30 rounded-xl
+                    focus:bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary/30
+                    transition-all duration-200 placeholder:text-muted-foreground/50"
                   />
                 </FormItem>
               )}
@@ -153,10 +156,12 @@ const ChatFooter = ({
             <Button
               type="submit"
               size="icon"
-              className="rounded-lg"
+              className="rounded-xl gradient-primary text-white shadow-md shadow-primary/20
+              hover:shadow-lg hover:shadow-primary/30 hover:scale-105 transition-all duration-200
+              disabled:opacity-50"
               disabled={isSendingMsg}
             >
-              <Send className="h-3.5 w-3.5" />
+              <Send className="h-4 w-4" />
             </Button>
           </form>
         </Form>

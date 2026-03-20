@@ -18,13 +18,11 @@ function App() {
 
   if (isAuthStatusLoading && !user) {
     return (
-      <div
-        className="flex flex-col items-center
-       justify-center h-screen
-      "
-      >
-        <Logo imgClass="size-20" showText={false} />
-        <Spinner className="w-6 h-6" />
+      <div className="flex flex-col items-center justify-center h-screen gap-4 gradient-mesh">
+        <div className="animate-float">
+          <Logo imgClass="size-16" showText={false} />
+        </div>
+        <Spinner className="w-5 h-5 text-primary" />
       </div>
     );
   }

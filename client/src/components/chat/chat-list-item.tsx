@@ -19,6 +19,8 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
     currentUserId
   );
 
+  const isActive = pathname.includes(chat._id);
+
   const getLastMessageText = () => {
     if (!lastMessage) {
       return isGroup
@@ -30,11 +32,10 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
     if (lastMessage.image) return "📷 Photo";
 
     if (isGroup && lastMessage.sender) {
-      return `${
-        lastMessage.sender._id === currentUserId
+      return `${lastMessage.sender._id === currentUserId
           ? "You"
           : lastMessage.sender.name
-      }: ${lastMessage.content}`;
+        }: ${lastMessage.content}`;
     }
 
     return lastMessage.content;
@@ -44,11 +45,18 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
     <button
       onClick={onClick}
       className={cn(
-        `w-full flex items-center gap-2 p-2 rounded-sm
-         hover:bg-sidebar-accent transition-colors text-left`,
-        pathname.includes(chat._id) && "!bg-sidebar-accent"
+        `w-full flex items-center gap-3 p-2.5 rounded-xl
+         hover:bg-accent/80 transition-all duration-200 text-left
+         group relative`,
+        isActive &&
+        "!bg-primary/8 dark:!bg-primary/15 shadow-sm"
       )}
     >
+      {/* Active indicator bar */}
+      {isActive && (
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-8 rounded-r-full gradient-primary" />
+      )}
+
       <AvatarWithBadge
         name={name}
         src={avatar}
@@ -62,16 +70,23 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
          flex items-center justify-between mb-0.5
         "
         >
-          <h5 className="text-sm font-semibold truncate">{name}</h5>
+          <h5
+            className={cn(
+              "text-sm font-semibold truncate",
+              isActive && "text-primary"
+            )}
+          >
+            {name}
+          </h5>
           <span
-            className="text-xs
-           ml-2 shrink-0 text-muted-foreground
+            className="text-[11px]
+           ml-2 shrink-0 text-muted-foreground/70
           "
           >
             {formatChatTime(lastMessage?.updatedAt || createdAt)}
           </span>
         </div>
-        <p className="text-xs truncate text-muted-foreground -mt-px">
+        <p className="text-xs truncate text-muted-foreground/80 -mt-px">
           {getLastMessageText()}
         </p>
       </div>

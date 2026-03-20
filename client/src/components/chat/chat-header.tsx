@@ -19,48 +19,35 @@ const ChatHeader = ({ chat, currentUserId }: Props) => {
   return (
     <div
       className="sticky top-0
-    flex items-center gap-5 border-b border-border
-    bg-card px-2 z-50
+    flex items-center gap-4 border-b border-border/50
+    bg-card/80 backdrop-blur-xl px-4 z-50
+    shadow-sm shadow-black/[0.03]
     "
     >
-      <div className="h-14 px-4 flex items-center">
-        <div>
-          <ArrowLeft
-            className="w-5 h-5 inline-block lg:hidden
-          text-muted-foreground cursor-pointer
-          mr-2
-          "
-            onClick={() => navigate(PROTECTED_ROUTES.CHAT)}
-          />
-        </div>
+      <div className="h-16 flex items-center gap-3 flex-1">
+        <button
+          className="lg:hidden p-1.5 -ml-1 rounded-lg hover:bg-accent transition-colors"
+          onClick={() => navigate(PROTECTED_ROUTES.CHAT)}
+        >
+          <ArrowLeft className="w-5 h-5 text-muted-foreground" />
+        </button>
+
         <AvatarWithBadge
           name={name}
           src={avatar}
           isGroup={isGroup}
           isOnline={isOnline}
         />
-        <div className="ml-2">
-          <h5 className="font-semibold">{name}</h5>
+        <div className="min-w-0 flex-1">
+          <h5 className="font-semibold text-sm truncate">{name}</h5>
           <p
-            className={`text-sm ${
-              isOnline ? "text-green-500" : "text-muted-foreground"
-            }`}
+            className={`text-xs transition-colors ${isOnline
+                ? "text-emerald-500 font-medium"
+                : "text-muted-foreground/70"
+              }`}
           >
             {subheading}
           </p>
-        </div>
-      </div>
-      <div>
-        <div
-          className={`flex-1
-            text-center
-            py-4 h-full
-            border-b-2
-            border-primary
-            font-medium
-            text-primary`}
-        >
-          Chat
         </div>
       </div>
     </div>
