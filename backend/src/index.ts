@@ -16,6 +16,7 @@ import routes from "./routes";
 import "./config/passport.config";
 
 const app = express();
+app.set("trust proxy", 1);
 const server = http.createServer(app);
 
 //socket
