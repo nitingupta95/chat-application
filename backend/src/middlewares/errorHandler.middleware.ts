@@ -1,13 +1,13 @@
-import { ErrorRequestHandler } from "express";
+import { ErrorRequestHandler, Request, Response, NextFunction } from "express";
 import { HTTPSTATUS } from "../config/http.config";
 import { AppError, ErrorCodes } from "../utils/app-error";
 
 export const errorHandler: ErrorRequestHandler = (
-  error,
-  req,
-  res,
-  next
-): any => {
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   console.log(`Error occurred: ${req.path}`, error);
 
   if (error instanceof AppError) {

@@ -1,4 +1,3 @@
-import Logo from "./logo";
 import {
   Empty,
   EmptyDescription,
