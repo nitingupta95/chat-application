@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WebSocket Client</title>
+  </head>
+  <body>
+    <h2>WebSocket Connected Example</h2>
+    <div id="announcement"></div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:3000");
+      // socket.on("connect", () => {
+
+      //   console.log("My socket ID:", socket.id);
+      // });
+
+      socket.emit("welcome", "Client sent server a message");
+
+      socket.on("only-socket", (msg) => {
+        console.log(msg);
+      });
+
+      socket.on("user:joined", (msg) => {
+        console.log(msg);
+      });
+    </script>
+  </body>
+</html>
