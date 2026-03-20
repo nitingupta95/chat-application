@@ -1,4 +1,4 @@
-# MERN Real-Time Messenger (WhatsApp Clone) 💬
+# MERN Real-Time Messenger (PULSE) 💬
 
 A full-stack, real-time chat application built with the **MERN** stack (MongoDB, Express, React, Node.js) and **Socket.io**. It is designed to replicate the instant messaging capabilities of modern applications like WhatsApp!
 
