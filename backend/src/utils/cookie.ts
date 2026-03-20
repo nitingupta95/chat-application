@@ -20,7 +20,7 @@ export const setJwtAuthCookie = ({ res, userId }: Cookie) => {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     secure: Env.NODE_ENV === "production" ? true : false,
-    sameSite: Env.NODE_ENV === "production" ? "strict" : "lax",
+    sameSite: Env.NODE_ENV === "production" ? "none" : "lax",
   });
 };
 
