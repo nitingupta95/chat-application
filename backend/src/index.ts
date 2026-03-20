@@ -58,7 +58,7 @@ if (Env.NODE_ENV === "production") {
 
 app.use(errorHandler);
 
-if (process.env.NODE_ENV !== "production") {
+if (!process.env.VERCEL) {
   server.listen(Env.PORT, async () => {
     await connectDatabase();
     console.log(`Server running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
