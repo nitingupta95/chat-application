@@ -58,7 +58,14 @@ if (Env.NODE_ENV === "production") {
 
 app.use(errorHandler);
 
-server.listen(Env.PORT, async () => {
-  await connectDatabase();
-  console.log(`Server running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
-});
+if (process.env.NODE_ENV !== "production") {
+  server.listen(Env.PORT, async () => {
+    await connectDatabase();
+    console.log(`Server running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
+  });
+} else {
+  // Initialize db on cold start for Vercel Serverless
+  connectDatabase();
+}
+
+export default app;
