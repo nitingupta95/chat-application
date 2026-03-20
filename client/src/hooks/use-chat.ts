@@ -188,12 +188,27 @@ export const useChat = create<ChatState>()((set, get) => ({
   updateChatLastMessage: (chatId, lastMessage) => {
     set((state) => {
       const chat = state.chats.find((c) => c._id === chatId);
-      if (!chat) return state;
+      
+      let newSingleChat = state.singleChat;
+      // Guarantee the active chat window ALSO receives this message to fix syncing bugs
+      if (state.singleChat && state.singleChat.chat._id === chatId) {
+        const exists = state.singleChat.messages.find((m) => m._id === lastMessage._id);
+        if (!exists) {
+          newSingleChat = {
+            ...state.singleChat,
+            messages: [...state.singleChat.messages, lastMessage],
+          };
+        }
+      }
+
+      if (!chat) return { ...state, singleChat: newSingleChat };
+
       return {
         chats: [
           { ...chat, lastMessage },
           ...state.chats.filter((c) => c._id !== chatId),
         ],
+        singleChat: newSingleChat,
       };
     });
   },
@@ -201,6 +216,9 @@ export const useChat = create<ChatState>()((set, get) => ({
   addNewMessage: (chatId, message) => {
     const chat = get().singleChat;
     if (chat?.chat._id === chatId) {
+      const exists = chat.messages.find((m) => m._id === message._id);
+      if (exists) return; // Prevent duplicates
+
       set({
         singleChat: {
           chat: chat.chat,

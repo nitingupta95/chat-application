@@ -1,4 +1,4 @@
-import { getOtherUserAndGroup } from "@/lib/helper";
+import { useOtherUserAndGroup } from "@/lib/helper";
 import { PROTECTED_ROUTES } from "@/routes/routes";
 import type { ChatType } from "@/types/chat.type";
 import { ArrowLeft } from "lucide-react";
@@ -11,7 +11,7 @@ interface Props {
 }
 const ChatHeader = ({ chat, currentUserId }: Props) => {
   const navigate = useNavigate();
-  const { name, subheading, avatar, isOnline, isGroup } = getOtherUserAndGroup(
+  const { name, subheading, avatar, isOnline, isGroup } = useOtherUserAndGroup(
     chat,
     currentUserId
   );

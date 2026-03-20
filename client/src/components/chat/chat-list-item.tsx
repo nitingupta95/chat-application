@@ -1,4 +1,4 @@
-import { getOtherUserAndGroup } from "@/lib/helper";
+import { useOtherUserAndGroup } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import type { ChatType } from "@/types/chat.type";
 import { useLocation } from "react-router-dom";
@@ -14,7 +14,7 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
   const { pathname } = useLocation();
   const { lastMessage, createdAt } = chat;
 
-  const { name, avatar, isOnline, isGroup } = getOtherUserAndGroup(
+  const { name, avatar, isOnline, isGroup } = useOtherUserAndGroup(
     chat,
     currentUserId
   );

@@ -3,17 +3,20 @@ import { v4 as uuidv4 } from "uuid";
 import { useSocket } from "@/hooks/use-socket";
 import type { ChatType } from "@/types/chat.type";
 
-export const isUserOnline = (userId?: string) => {
+export const useOnlineStatus = (userId?: string) => {
+  const onlineUsers = useSocket((state) => state.onlineUsers);
   if (!userId) return false;
-  const { onlineUsers } = useSocket.getState();
   return onlineUsers.includes(userId);
 };
 
-export const getOtherUserAndGroup = (
+export const useOtherUserAndGroup = (
   chat: ChatType,
   currentUserId: string | null
 ) => {
   const isGroup = chat?.isGroup;
+
+  const other = chat?.participants.find((p) => p._id !== currentUserId);
+  const isOnline = useOnlineStatus(other?._id ?? "");
 
   if (isGroup) {
     return {
@@ -23,9 +26,6 @@ export const getOtherUserAndGroup = (
       isGroup,
     };
   }
-
-  const other = chat?.participants.find((p) => p._id !== currentUserId);
-  const isOnline = isUserOnline(other?._id ?? "");
 
   return {
     name: other?.name || "Unknown",
