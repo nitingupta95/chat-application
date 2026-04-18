@@ -1,16 +1,18 @@
 # MERN Real-Time Messenger (PULSE) 💬
 
-A full-stack, real-time chat application built with the **MERN** stack (MongoDB, Express, React, Node.js) and **Socket.io**. It is designed to replicate the instant messaging capabilities of modern applications like WhatsApp!
+A full-stack, real-time chat application built with the **MERN** stack (MongoDB, Express, React, Node.js) and **Socket.io**. It is designed to replicate the instant messaging capabilities of modern applications!
 
 ## ✨ Features
 
 - **⚡️ Real-time Messaging:** Lightning-fast, instant message syncing and room broadcasting using `Socket.io`.
 - **🟢 Online Status Tracking:** Real-time visibility into whether a user is active or offline across the platform.
+- **👥 Group Dynamics:** Built-in capabilities to create and efficiently manage group chats beyond standard 1-to-1 messaging.
 - **🔒 Secure Authentication:** Handled via JSON Web Tokens (JWT) stored in HTTP-Only secure cookies with protected cross-site (SameSite) policies.
-- **☁️ Media Uploads:** Built-in integration with Cloudinary for seamless image/avatar uploads in messages and profiles.
-- **🎨 Modern UI & Theming:** A beautiful, responsive frontend styled with **Tailwind CSS**, featuring dedicated Dark/Light mode toggles.
-- **📦 Reliable State Management:** Utilizing **Zustand** for lightweight, predictable global state across the React application.
-- **🚀 Production Ready:** Configured explicitly to support split-domain deployments (e.g., Vercel for the client frontend, Render.com for the WebSocket backend).
+- **🛡️ Type-Safe Validation:** Robust client-side form validation architecture leveraging `zod` and `react-hook-form`.
+- **☁️ Media Uploads:** Built-in integration with Cloudinary for seamless frontend image uploads directly into the chat stream.
+- **🎨 Modern UI & Theming:** A beautiful, responsive frontend styled with **Tailwind CSS**, featuring dedicated Dark/Light mode toggles, intelligent `.glass` tokens, and an interactive landing page.
+- **📦 Reliable State Management:** Utilizing **Zustand** for lightweight, predictable global state architecture instead of heavy context providers.
+- **🚀 Production Ready:** Configured explicitly to support split-domain HTTP/WSS deployments (e.g., Vercel for the client frontend, Render.com for the WebSocket backend).
 
 ## 🛠️ Tech Stack
 

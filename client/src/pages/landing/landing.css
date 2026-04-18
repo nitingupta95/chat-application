@@ -1,0 +1,6 @@
+/* Specific rules that supplement the 3D visual effects on the landing page hero section */
+/* The rest of the design has been ported to use global index.css utilities (e.g. .glass, .gradient-mesh) */
+
+.transform-3d-style {
+  transform-style: preserve-3d;
+}

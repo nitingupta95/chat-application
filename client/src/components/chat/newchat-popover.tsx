@@ -205,7 +205,7 @@ const UserAvatar = memo(({ user }: { user: UserType }) => (
     <div className="flex-1 min-w-0">
       <h5 className="text-[13px] font-medium truncate">{user.name}</h5>
       <p className="text-[11px] text-muted-foreground/70">
-        Hey there! I&apos;m using Pulse
+        Hey there! I&apos;m using Aura
       </p>
     </div>
   </>

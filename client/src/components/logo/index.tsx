@@ -43,7 +43,7 @@ const Logo = ({
           textClass
         )}
       >
-        Pulse
+        Aura
       </span>
     )}
   </Link>

@@ -95,7 +95,7 @@ const SignUp = () => {
                 Create your account
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                Join Pulse and start messaging instantly
+                Join Aura and start messaging instantly
               </p>
             </div>
           </CardHeader>
@@ -201,7 +201,7 @@ const SignUp = () => {
                 >
                   Already have an account?{" "}
                   <Link
-                    to="/"
+                    to="/sign-in"
                     className="font-medium text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
                   >
                     Sign in

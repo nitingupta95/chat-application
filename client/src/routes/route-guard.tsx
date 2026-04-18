@@ -8,7 +8,7 @@ interface Props {
 const RouteGuard = ({ requireAuth }: Props) => {
   const { user } = useAuth();
 
-  if (requireAuth && !user) return <Navigate to="/" replace />;
+  if (requireAuth && !user) return <Navigate to="/sign-in" replace />;
 
   if (!requireAuth && user) return <Navigate to="/chat" replace />;
 
