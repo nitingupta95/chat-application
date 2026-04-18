@@ -10,11 +10,12 @@ function App() {
   const { pathname } = useLocation();
   const { user, isAuthStatus, isAuthStatusLoading } = useAuth();
   const isAuth = isAuthRoute(pathname);
+  const isPublic = pathname === "/";
 
   useEffect(() => {
-    if (isAuth) return;
+    if (isAuth || isPublic) return;
     isAuthStatus();
-  }, [isAuthStatus, isAuth]);
+  }, [isAuthStatus, isAuth, isPublic]);
 
   if (isAuthStatusLoading && !user) {
     return (

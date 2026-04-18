@@ -1,4 +1,4 @@
-# MERN Real-Time Messenger (PULSE) 💬
+# MERN Real-Time Messenger 💬
 
 A full-stack, real-time chat application built with the **MERN** stack (MongoDB, Express, React, Node.js) and **Socket.io**. It is designed to replicate the instant messaging capabilities of modern applications!
 
@@ -10,7 +10,8 @@ A full-stack, real-time chat application built with the **MERN** stack (MongoDB,
 - **🔒 Secure Authentication:** Handled via JSON Web Tokens (JWT) stored in HTTP-Only secure cookies with protected cross-site (SameSite) policies.
 - **🛡️ Type-Safe Validation:** Robust client-side form validation architecture leveraging `zod` and `react-hook-form`.
 - **☁️ Media Uploads:** Built-in integration with Cloudinary for seamless frontend image uploads directly into the chat stream.
-- **🎨 Modern UI & Theming:** A beautiful, responsive frontend styled with **Tailwind CSS**, featuring dedicated Dark/Light mode toggles, intelligent `.glass` tokens, and an interactive landing page.
+- **🎨 Modern UI & Theming:** A beautiful, responsive frontend styled with **Tailwind CSS**, featuring dedicated Dark/Light mode toggles, intelligent `.glass` tokens. 
+- **🚀 Ultra-Fast Static Splash:** The landing page is performance optimized to require **zero API calls** on load, serving 100% statically to maximize SEO.
 - **📦 Reliable State Management:** Utilizing **Zustand** for lightweight, predictable global state architecture instead of heavy context providers.
 - **🚀 Production Ready:** Configured explicitly to support split-domain HTTP/WSS deployments (e.g., Vercel for the client frontend, Render.com for the WebSocket backend).
 
