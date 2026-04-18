@@ -151,12 +151,20 @@ export const useChat = create<ChatState>()((set, get) => ({
       //replace the temp user message
       set((state) => {
         if (!state.singleChat) return state;
+
+        // Check if the socket already appended the final message before the API response
+        const alreadyAddedBySocket = state.singleChat.messages.some(
+          (m) => m._id === userMessage._id
+        );
+
         return {
           singleChat: {
             ...state.singleChat,
-            messages: state.singleChat.messages.map((msg) =>
-              msg._id === tempUserId ? userMessage : msg
-            ),
+            messages: alreadyAddedBySocket
+              ? state.singleChat.messages.filter((msg) => msg._id !== tempUserId)
+              : state.singleChat.messages.map((msg) =>
+                  msg._id === tempUserId ? userMessage : msg
+                ),
           },
         };
       });
